@@ -47,7 +47,7 @@ public class EnemyPoolManager : MonoBehaviour
         GameObject enemyObject = Instantiate(enemyPrefab);
         Enemy enemy = enemyObject.GetComponent<Enemy>();
         enemy.Deactive();
-        enemyPool.Enqueue(enemy);
+        //enemyPool.Enqueue(enemy);
     }
 
     // Àû »ç¿ë
@@ -66,7 +66,6 @@ public class EnemyPoolManager : MonoBehaviour
 
     public void ReturnEnemy(Enemy enemy)
     {
-        enemy.Deactive();
         enemyPool.Enqueue(enemy);
     }
 

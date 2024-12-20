@@ -5,7 +5,7 @@ public class Enemy : Character
     public override int hp { get; set; } = 5;
     public override float moveSpeed { get; set; } = 2f;
     public override int atk { get; set; } = 10;
-    public override int atkSpeed { get; set; } = 0;
+    public override float atkSpeed { get; set; } = 0;
 
     [SerializeField]
     private Player player;
@@ -17,9 +17,9 @@ public class Enemy : Character
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        
+        base.Update();
     }
 
     private void FixedUpdate()
@@ -30,6 +30,10 @@ public class Enemy : Character
     public void Initalize(Vector3 position)
     {
         gameObject.SetActive(true);
+        hp = 5;
+        moveSpeed = 2f;
+        atk = 10;
+        atkSpeed = 0;
         transform.position = position;
     }
 
@@ -43,9 +47,8 @@ public class Enemy : Character
     public override void Move()
     {
         // 플레이어 캐릭터에게 이동
-        Vector3 direction = player.transform.position-transform.position;
-        direction = direction.normalized * moveSpeed * Time.deltaTime;
-        transform.position += direction;
+
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime * moveSpeed);
     }
 
     // 비활성화
@@ -53,5 +56,7 @@ public class Enemy : Character
     {
         // 캐릭터 사망
         gameObject.SetActive(false);
+        EnemyPoolManager.Instance.ReturnEnemy(this);
     }
+
 }
