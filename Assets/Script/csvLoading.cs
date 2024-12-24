@@ -60,11 +60,9 @@ public class csvLoading : MonoBehaviour
             Debug.LogError("파일이 존재하지 않습니다.");
         }
 
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
 }

@@ -40,8 +40,7 @@ public class Enemy : Character
 
     public override void Attack()
     {
-        // 충돌시 자신 파괴 및 데미지 부여
-        throw new System.NotImplementedException();
+        
     }
 
     public override void Move()
@@ -59,4 +58,16 @@ public class Enemy : Character
         EnemyPoolManager.Instance.ReturnEnemy(this);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Debug.Log("충돌"+collision.gameObject.name);
+        // 충돌한 오브젝트에게 데미지
+        
+        if (collision.tag == "Player")
+        {
+            Player player = collision.GetComponent<Player>();
+            player.TakeDamage(atk);
+            Deactive();
+        }
+    }
 }

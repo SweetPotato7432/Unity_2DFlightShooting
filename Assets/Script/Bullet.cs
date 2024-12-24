@@ -55,7 +55,7 @@ public class Bullet : MonoBehaviour
     public void Deactive()
     {
         StopAllCoroutines();
-        Debug.Log("제거");
+        //Debug.Log("제거");
         gameObject.SetActive(false);
         BulletPoolManager.Instance.ReturnBullet(this);
     }

@@ -46,7 +46,7 @@ public class BulletPoolManager : MonoBehaviour
         GameObject bulletObject = Instantiate(bulletPrefap);
         Bullet bullet = bulletObject.GetComponent<Bullet>();
         bullet.Deactive();
-        bulletPool.Enqueue(bullet);
+        //bulletPool.Enqueue(bullet);
     }
 
     // Àû »ç¿ë
