@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,11 @@ public class Player : Character
     Transform shootPosition;
 
     Rigidbody2D rb;
+
+    bool isTopTouched;
+    bool isBottomTouched;
+    bool isLeftTouched;
+    bool isRightTouched;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -84,10 +90,19 @@ public class Player : Character
 
     public override void Move()
     {
-        //Vector3 direction = Vector3.up * fixedJoystick.Vertical + Vector3.right * fixedJoystick.Horizontal;
-        //direction = direction * moveSpeed * Time.deltaTime;
-        //transform.position += direction;
-        Vector3 direction = Vector3.up * varialbeJoystick.Vertical + Vector3.right * varialbeJoystick.Horizontal;
+        float h = varialbeJoystick.Horizontal;
+        float v = varialbeJoystick.Vertical;
+
+        if ((isRightTouched && h > 0) || (isLeftTouched && h < 0))
+        {
+            h = 0;
+        }
+        if ((isTopTouched && v > 0) || (isBottomTouched && v < 0))
+        {
+            v = 0;
+        }
+
+        Vector3 direction = Vector3.up * v + Vector3.right * h;
         float magnitude = direction.magnitude;
         magnitude = Mathf.Clamp01(magnitude);
 
@@ -97,5 +112,47 @@ public class Player : Character
         rb.linearVelocity = direction;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Border")
+        {
+            switch (collision.gameObject.name)
+            {
+                case "Top":
+                    isTopTouched = true;
+                    break;
+                case "Bottom":
+                    isBottomTouched = true;
+                    break;
+                case "Left":
+                    isLeftTouched = true;
+                    break;
+                case "Right":
+                    isRightTouched = true;
+                    break;
+            }
+        }
+    }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Border")
+        {
+            switch (collision.gameObject.name)
+            {
+                case "Top":
+                    isTopTouched = false;
+                    break;
+                case "Bottom":
+                    isBottomTouched = false;
+                    break;
+                case "Left":
+                    isLeftTouched = false;
+                    break;
+                case "Right":
+                    isRightTouched = false;
+                    break;
+            }
+        }
+    }
 }

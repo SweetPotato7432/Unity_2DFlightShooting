@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
     private Vector3 bulletDir;
     private string targetTag;
 
+    
+
     private SpriteRenderer spriteRenderer;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -85,6 +87,7 @@ public class Bullet : MonoBehaviour
                 Deactive();
             }
         }
+        
     }
 
 }
