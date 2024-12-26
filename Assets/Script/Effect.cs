@@ -1,10 +1,7 @@
 using UnityEngine;
 
-public class JoystickTest : MonoBehaviour
+public class Effect : MonoBehaviour
 {
-    [SerializeField]
-    VariableJoystick variableJoystick;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -14,6 +11,12 @@ public class JoystickTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(variableJoystick.Direction);
+        
+    }
+
+    public void EffectEnd()
+    {
+        Debug.Log("¿Ã∆Â∆Æ ¡æ∑·");
+        gameObject.SetActive(false);
     }
 }

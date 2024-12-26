@@ -1,5 +1,5 @@
 using System.Collections;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,10 +8,13 @@ public class Player : Character
     public VariableJoystick varialbeJoystick;
     public bool btnDown;
 
-    public override int hp { get; set; } = 50;
-    public override float moveSpeed { get; set; } = 3f;
-    public override int atk { get; set; } = 5;
-    public override float atkSpeed { get; set; } = 0.2f;
+    Animator animator;
+
+    public override int maxHP { get; set; }
+    public override int curHP { get; set; }
+    public override float moveSpeed { get; set; }
+    public override int atk { get; set; }
+    public override float atkSpeed { get; set; }
 
     [SerializeField]
     private bool canAttack;
@@ -21,14 +24,55 @@ public class Player : Character
 
     Rigidbody2D rb;
 
+    [SerializeField]
+    private Camera mainCamera;
+    [SerializeField]
+    private Slider hpSlider;
+    [SerializeField]
+    private RectTransform ui_hp_bar;
+
     bool isTopTouched;
     bool isBottomTouched;
     bool isLeftTouched;
     bool isRightTouched;
 
+    [SerializeField]
+    protected List<List<string>> csvData = new List<List<string>>();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        CSVLoading csvloading = new CSVLoading();
+        csvData = csvloading.csvLoad("CharacterStat");
+
+        int characterNum = 0;
+        int field_num = 0;
+        foreach (string field in csvData[characterNum])
+        {
+            switch (field_num)
+            {
+                case 0:
+                    break;
+                case 1:
+                    maxHP = int.Parse(field);
+                    break;
+                case 2:
+                    moveSpeed = float.Parse(field);
+                    break;
+                case 3:
+                    atk = int.Parse(field);
+                    break;
+                case 4:
+                    atkSpeed = float.Parse(field);
+                    break;
+            }
+            field_num++;
+        }
+        
+        curHP = maxHP;
+        hpSlider.maxValue = maxHP;
+        animator = GetComponent<Animator>();
+
         canAttack = true;
         btnDown = false;
 
@@ -42,7 +86,8 @@ public class Player : Character
         //float speed = rb.linearVelocity.magnitude;
         //Debug.Log("현재 속도(2D): " + speed.ToString());
 
-        //Debug.Log(hp);
+        //Debug.Log(curHP);
+        hpSlider.value = curHP;
 
         if (btnDown)
         {
@@ -50,11 +95,22 @@ public class Player : Character
         }
 
 
+
     }
 
     public void FixedUpdate()
     {
         Move();
+
+        
+    }
+
+    public void LateUpdate()
+    {
+        // 플레이어의 월드 좌표를 2D 좌표로 전송
+        Vector3 screenPos = mainCamera.WorldToScreenPoint(transform.position);
+        screenPos.y = screenPos.y - 70f;
+        ui_hp_bar.position = screenPos;
     }
     public override void Attack()
     {
@@ -71,7 +127,6 @@ public class Player : Character
         canAttack = false;
         yield return new WaitForSeconds(atkSpeed);
         canAttack = true;
-
     }
 
     public void BtnDown()
@@ -92,6 +147,24 @@ public class Player : Character
     {
         float h = varialbeJoystick.Horizontal;
         float v = varialbeJoystick.Vertical;
+
+        if (h > 0.3f)
+        {
+            animator.SetBool("IsRight",true);
+        }
+        else
+        {
+            animator.SetBool("IsRight", false);
+        }
+
+        if (h < -0.3f)
+        {
+            animator.SetBool("IsLeft", true);
+        }
+        else
+        {
+            animator.SetBool("IsLeft", false);
+        }
 
         if ((isRightTouched && h > 0) || (isLeftTouched && h < 0))
         {

@@ -1,19 +1,27 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Character
 {
-    public override int hp { get; set; } = 5;
-    public override float moveSpeed { get; set; } = 2f;
-    public override int atk { get; set; } = 10;
-    public override float atkSpeed { get; set; } = 0;
+    public override int maxHP { get; set; }
+    public override int curHP { get; set; }
+    public override float moveSpeed { get; set; }
+    public override int atk { get; set; }
+    public override float atkSpeed { get; set; }
 
     [SerializeField]
     private Player player;
 
+    bool isFirstDeactive = true;
+
+    GameManager gameManger;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        player = FindFirstObjectByType<Player>().GetComponent<Player>();
+        player = FindFirstObjectByType<Player>();
+        gameManger = FindFirstObjectByType<GameManager>();
     }
 
     // Update is called once per frame
@@ -27,13 +35,32 @@ public class Enemy : Character
         Move();
     }
 
-    public void Initalize(Vector3 position)
+    public void Initalize(List<string> enemyStat, Vector3 position)
     {
         gameObject.SetActive(true);
-        hp = 5;
-        moveSpeed = 2f;
-        atk = 10;
-        atkSpeed = 0;
+        int field_num = 0;
+        foreach (string field in enemyStat)
+        {
+            switch (field_num)
+            {
+                case 0:
+                    break;
+                case 1:
+                    maxHP = int.Parse(field);
+                    break;
+                case 2:
+                    moveSpeed = float.Parse(field);
+                    break;
+                case 3:
+                    atk = int.Parse(field);
+                    break;
+                case 4:
+                    atkSpeed = float.Parse(field);
+                    break;
+            }
+            field_num++;
+        }
+        curHP = maxHP;
         transform.position = position;
     }
 
@@ -46,13 +73,23 @@ public class Enemy : Character
     public override void Move()
     {
         // 플레이어 캐릭터에게 이동
-
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime * moveSpeed);
+        if (player != null)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime * moveSpeed);
+        }
     }
 
     // 비활성화
     public override void Deactive()
     {
+        if (isFirstDeactive)
+        {
+            isFirstDeactive = false;
+        }
+        else
+        {
+            gameManger.AddScore(100);
+        }
         // 캐릭터 사망
         gameObject.SetActive(false);
         EnemyPoolManager.Instance.ReturnEnemy(this);

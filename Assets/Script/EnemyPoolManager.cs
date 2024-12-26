@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class EnemyPoolManager : MonoBehaviour
@@ -13,6 +14,8 @@ public class EnemyPoolManager : MonoBehaviour
     private int initialPoolSize = 10; // 초기 풀 크기
 
     private Queue<Enemy> enemyPool= new Queue<Enemy>();
+
+    protected List<List<string>> csvData = new List<List<string>>();
 
     private void Awake()
     {
@@ -31,6 +34,11 @@ public class EnemyPoolManager : MonoBehaviour
         InitializePool();
     }
 
+    private void Start()
+    {
+        CSVLoading csvloading = new CSVLoading();
+        csvData = csvloading.csvLoad("CharacterStat");
+    }
     // 풀 초기화
     private void InitializePool()
     {
@@ -58,8 +66,11 @@ public class EnemyPoolManager : MonoBehaviour
             CreateNewEnemy();
         }
 
+        // 적 타입 증가시 랜덤으로
+        int characterNum = 1;
+
         Enemy enemy = enemyPool.Dequeue();
-        enemy.Initalize(position);
+        enemy.Initalize(csvData[characterNum] ,position);
 
         return enemy;
     }
