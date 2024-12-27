@@ -39,9 +39,12 @@ public class Player : Character
     [SerializeField]
     protected List<List<string>> csvData = new List<List<string>>();
 
+    bool isInvincible;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        isInvincible = false;
         CSVLoading csvloading = new CSVLoading();
         csvData = csvloading.csvLoad("CharacterStat");
 
@@ -183,6 +186,27 @@ public class Player : Character
         
         //transform.position += direction;
         rb.linearVelocity = direction;
+    }
+
+    public override void TakeDamage(int atk)
+    {
+        if (!isInvincible)
+        {
+            
+            base.TakeDamage(atk);
+            StartCoroutine(InvincibleCheck());
+        }
+        //Debug.Log("데미지 입음");
+        // 무적 시간 돌입
+    }
+
+    IEnumerator InvincibleCheck()
+    {
+        animator.SetBool("IsHit", true);
+        isInvincible = true;
+        yield return new WaitForSeconds(1f);
+        animator.SetBool("IsHit", false);
+        isInvincible = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

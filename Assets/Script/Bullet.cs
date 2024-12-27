@@ -74,18 +74,9 @@ public class Bullet : MonoBehaviour
         // 충돌한 오브젝트에게 데미지
         if(collision.tag == targetTag)
         {
-            if (collision.tag == "Enemy")
-            {
-                Enemy Enemy = collision.GetComponent<Enemy>();
-                Enemy.TakeDamage(atk);
-                Deactive();
-            }
-            else if(collision.tag == "Player")
-            {
-                Player player = collision.GetComponent<Player>();
-                player.TakeDamage(atk);
-                Deactive();
-            }
+            Character character = collision.GetComponent<Character>();
+            character.TakeDamage(atk);
+            Deactive();
         }
         
     }

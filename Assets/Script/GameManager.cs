@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -17,6 +18,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     int score = 0;
+    [SerializeField]
+    private Player player;
+    [SerializeField]
+    TMP_Text scoreText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,6 +37,7 @@ public class GameManager : MonoBehaviour
             spawnPoints.Add(new Vector3(int.Parse(row[1]), int.Parse(row[2]), 0));
             row_num++;
         }
+
     }
 
     // Update is called once per frame
@@ -40,8 +46,12 @@ public class GameManager : MonoBehaviour
         time += Time.deltaTime;
         if (time >= spawnCooltime)
         {
-            SpawnEnemy();
-            time -= spawnCooltime;
+            player = FindFirstObjectByType<Player>();
+            if (player != null)
+            {
+                SpawnEnemy();
+                time -= spawnCooltime;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -49,6 +59,7 @@ public class GameManager : MonoBehaviour
             SpawnEnemy();
         }
 
+        scoreText.text = score.ToString();
         
     }
 

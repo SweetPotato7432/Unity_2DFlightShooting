@@ -27,7 +27,7 @@ abstract public class Character : MonoBehaviour
     abstract public void Attack();
     abstract public void Move();
     abstract public void Deactive();
-    public void TakeDamage(int atk)
+    virtual public void TakeDamage(int atk)
     {
         curHP -= atk;
     }
