@@ -85,4 +85,9 @@ public class GameManager : MonoBehaviour
     {
         this.score += score;
     }
+
+    public int GetScore()
+    {
+        return score;
+    }
 }

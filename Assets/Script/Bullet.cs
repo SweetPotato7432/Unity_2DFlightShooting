@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     private Vector3 bulletDir;
     private string targetTag;
 
-    
+    bool isFirstDeactive = true;
 
     private SpriteRenderer spriteRenderer;
     
@@ -56,6 +56,14 @@ public class Bullet : MonoBehaviour
 
     public void Deactive()
     {
+        if (isFirstDeactive)
+        {
+            isFirstDeactive = false;
+        }
+        else
+        {
+            EffectPoolManager.Instance.GetEffect(transform.position, Effect.AnimType.BulletHit);
+        }
         StopAllCoroutines();
         //Debug.Log("Á¦°Å");
         gameObject.SetActive(false);

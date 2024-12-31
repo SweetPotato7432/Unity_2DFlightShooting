@@ -143,6 +143,7 @@ public class Player : Character
 
     public override void Deactive()
     {
+        EffectPoolManager.Instance.GetEffect(transform.position, Effect.AnimType.PlayerDead);
         gameObject.SetActive(false);
     }
 

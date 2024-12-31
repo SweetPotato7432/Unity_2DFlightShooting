@@ -1,22 +1,42 @@
+using System;
 using UnityEngine;
 
 public class Effect : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField]
+    Animator effectAnimator;
+
+    public enum AnimType 
+    { 
+        PlayerDead,
+        EnemyDead,
+        BulletHit
+    }
+    public void Initalize(Vector3 position,AnimType animType)
     {
-        
+        gameObject.SetActive(true);
+        transform.position = position;
+
+        switch (animType)
+        {
+            case AnimType.PlayerDead:
+                effectAnimator.Play("Effect_Explosion1");
+                break;
+            case AnimType.EnemyDead:
+                effectAnimator.Play("Effect_Explosion2");
+                break;
+            case AnimType.BulletHit:
+                effectAnimator.Play("Effect_HitBullet");
+                break;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void EffectEnd()
+    public void Deactive()
     {
         Debug.Log("¿Ã∆Â∆Æ ¡æ∑·");
         gameObject.SetActive(false);
+        EffectPoolManager.Instance.ReturnEffect(this);
     }
+
+  
 }

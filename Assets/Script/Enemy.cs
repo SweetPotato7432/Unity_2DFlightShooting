@@ -88,6 +88,7 @@ public class Enemy : Character
         }
         else
         {
+            EffectPoolManager.Instance.GetEffect(transform.position, Effect.AnimType.EnemyDead);
             gameManger.AddScore(100);
         }
         // Ä³¸¯ÅÍ »ç¸Á
