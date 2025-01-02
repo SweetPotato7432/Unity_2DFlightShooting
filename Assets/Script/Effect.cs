@@ -33,7 +33,7 @@ public class Effect : MonoBehaviour
 
     public void Deactive()
     {
-        Debug.Log("¿Ã∆Â∆Æ ¡æ∑·");
+        //Debug.Log("¿Ã∆Â∆Æ ¡æ∑·");
         gameObject.SetActive(false);
         EffectPoolManager.Instance.ReturnEffect(this);
     }

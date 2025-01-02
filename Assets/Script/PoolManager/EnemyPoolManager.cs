@@ -30,7 +30,7 @@ public class EnemyPoolManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject); // 다른 씬에서도 사용
 
-        InitializePool();
+        //InitializePool();
     }
 
     private void Start()
@@ -39,8 +39,9 @@ public class EnemyPoolManager : MonoBehaviour
         csvData = csvloading.csvLoad("CharacterStat");
     }
     // 풀 초기화
-    private void InitializePool()
+    public void InitializePool()
     {
+        enemyPool = new Queue<Enemy>();
         for (int i = 0; i < initialPoolSize; i++)
         {
             CreateNewEnemy();

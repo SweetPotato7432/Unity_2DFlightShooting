@@ -3,6 +3,8 @@ using UnityEngine.Audio;
 
 public class GameSettingData : MonoBehaviour
 {
+    private int[] bestScore = new int[10];
+
     public static GameSettingData Instance { get; private set; }
     [SerializeField]
     private AudioMixer audioMixer;
@@ -15,7 +17,7 @@ public class GameSettingData : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             LoadAudioSettings(); // PlayerPrefs에서 설정을 불러오기
-            
+            InitializeCurrentPlayer();
         }
         else
         {
@@ -27,6 +29,44 @@ public class GameSettingData : MonoBehaviour
     {
     }
 
+    // 점수 저장 및 리더보드 세팅
+    public void SaveScore(int currentScore)
+    {
+        bool firstSwap = true;
+
+        int tempScore = 0;
+
+        for (int i = 0; i < 10; i++)
+        {
+            bestScore[i] = PlayerPrefs.GetInt(i + "BestScore");
+
+            while (bestScore[i] < currentScore)
+            {
+                if (firstSwap)
+                {
+                    PlayerPrefs.SetInt("CurrentPlayerRank", i);
+                    firstSwap = false;
+                }
+
+                tempScore = bestScore[i];
+                bestScore[i] = currentScore;
+                PlayerPrefs.SetInt(i+"BestScore", currentScore);
+
+                currentScore = tempScore;
+            }
+            if (firstSwap)
+            {
+                InitializeCurrentPlayer();
+            }
+        }
+    }
+
+    public void InitializeCurrentPlayer()
+    {
+        PlayerPrefs.SetInt("CurrentPlayerRank", -1);
+    }
+
+    // 오디오 세팅
     public void SaveAudioSettings(float bgmVolume, float sfxVolume)
     {
         PlayerPrefs.SetFloat("BGM", bgmVolume);

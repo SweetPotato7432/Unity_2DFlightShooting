@@ -23,9 +23,19 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     TMP_Text scoreText;
 
+    [SerializeField]
+    private GameObject resultMenu;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    { 
+    {
+        BulletPoolManager.Instance.InitializePool();
+        EnemyPoolManager.Instance.InitializePool();
+        EffectPoolManager.Instance.InitializePool();
+
+
+        player = FindFirstObjectByType<Player>();
+
         CSVLoading csvLoading = new CSVLoading();
 
         csvData = csvLoading.csvLoad("EnemySpawnPos");
@@ -60,6 +70,8 @@ public class GameManager : MonoBehaviour
         }
 
         scoreText.text = score.ToString();
+
+
         
     }
 
@@ -78,7 +90,7 @@ public class GameManager : MonoBehaviour
         lastIndex = spawnIndex;
 
         Enemy enemy = EnemyPoolManager.Instance.GetEnemy(spawnPosition);
-        Debug.Log($"Spawned Enemy at {spawnPosition}");
+        //Debug.Log($"Spawned Enemy at {spawnPosition}");
     }
 
     public void AddScore(int score)
@@ -89,5 +101,11 @@ public class GameManager : MonoBehaviour
     public int GetScore()
     {
         return score;
+    }
+
+    public void GameOver()
+    {
+        GameSettingData.Instance.SaveScore(score);
+        resultMenu.gameObject.SetActive(true);
     }
 }

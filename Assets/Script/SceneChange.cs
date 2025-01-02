@@ -2,8 +2,15 @@ using UnityEngine;
 
 public class SceneChange : MonoBehaviour
 {
-    public void LoadBattleScene()
+
+    public void LoadScene(string sceneName)
     {
-        MySceneManger.Instance.ChangeScene("BattleScene");
+        MySceneManger.Instance.ChangeScene(sceneName);
+    }
+
+    public void ExitGame()
+    {
+        GameSettingData.Instance.InitializeCurrentPlayer();
+        Application.Quit();
     }
 }

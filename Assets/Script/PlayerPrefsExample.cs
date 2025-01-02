@@ -7,18 +7,7 @@ public class PlayerPrefsExample : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        string path = string.Empty;
-
-        path = $"{Application.persistentDataPath}/Unity/{Application.companyName}/{Application.productName}/prefs";
-
-        Debug.Log("playerPrefs path : "+path);
-
-        SaveData("PlayerName", "UnityPlayer");
-        SaveData("HighScore", 12345);
-
-        string playerName = LoadData("PlayerName", "DefaultName");
-
-        Debug.Log($"PlayerName : {playerName}");
+        ResetAllData();
     }
 
     // Update is called once per frame

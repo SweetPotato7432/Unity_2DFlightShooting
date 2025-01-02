@@ -25,14 +25,15 @@ public class BulletPoolManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
 
-        InitializePool();
+        //InitializePool();
 
         
     }
 
     // 풀 초기화
-    private void InitializePool()
+    public void InitializePool()
     {
+        bulletPool = new Queue<Bullet>();
         for (int i = 0; i < initialPoolSize; i++)
         {
             CreateNewBullet();

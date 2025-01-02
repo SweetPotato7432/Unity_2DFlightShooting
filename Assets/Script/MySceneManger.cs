@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -13,7 +12,7 @@ public class MySceneManger : MonoBehaviour
     [SerializeField]
     private CanvasGroup fade_IMG;
 
-    float fadeDuration = 2f;
+    float fadeDuration = 1f;
 
     [SerializeField]
     private GameObject loading;
@@ -34,24 +33,27 @@ public class MySceneManger : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
 
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     public void ChangeScene(string sceneName)
     {
-        fade_IMG.DOFade(1, fadeDuration).
-            OnStart(() => { 
-                fade_IMG.blocksRaycasts = true;
-            })
-            .OnComplete(() => {
-                StartCoroutine(LoadScene(sceneName));            
-            });
+        fade_IMG.DOFade(1, fadeDuration)
+        .SetUpdate(true)
+        .OnStart(() => { 
+            fade_IMG.blocksRaycasts = true;
+        })
+        .OnComplete(() => {
+            StartCoroutine(LoadScene(sceneName));            
+        });
     }
 
     IEnumerator LoadScene(string sceneName)
     {
         loading.SetActive(true);
+        loading_Text.gameObject.SetActive(true);
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneName);
+        async.allowSceneActivation = false;
         float past_time = 0;
         float percentage = 0;
 
@@ -59,7 +61,8 @@ public class MySceneManger : MonoBehaviour
         {
             yield return null;
 
-            past_time += Time.deltaTime;
+            //past_time += Time.deltaTime;
+            past_time += Time.unscaledDeltaTime;
 
             if (percentage >= 90)
             {
@@ -88,11 +91,13 @@ public class MySceneManger : MonoBehaviour
     private void OnSceneLoaded(Scene scene,LoadSceneMode mode)
     {
         fade_IMG.DOFade(0, fadeDuration)
-    .OnStart(() => {
-        loading.SetActive(false);
-    })
-    .OnComplete(() => {
-        fade_IMG.blocksRaycasts = false;
-    });
+        .SetUpdate(true)
+        .OnStart(() => {
+            loading.SetActive(false);
+            loading_Text.gameObject.SetActive(false);
+        })
+        .OnComplete(() => {
+            fade_IMG.blocksRaycasts = false;
+        });
     }
 }

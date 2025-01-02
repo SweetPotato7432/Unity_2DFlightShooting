@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class Player : Character
 {
+    [SerializeField]
+    GameManager gameManager;
+
     public VariableJoystick varialbeJoystick;
     public bool btnDown;
 
@@ -44,6 +47,8 @@ public class Player : Character
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        gameManager = FindFirstObjectByType<GameManager>();
+
         isInvincible = false;
         CSVLoading csvloading = new CSVLoading();
         csvData = csvloading.csvLoad("CharacterStat");
@@ -90,7 +95,16 @@ public class Player : Character
         //Debug.Log("현재 속도(2D): " + speed.ToString());
 
         //Debug.Log(curHP);
-        hpSlider.value = curHP;
+        if (curHP > 0)
+        {
+            hpSlider.value = curHP;
+        }
+        else
+        {
+            hpSlider.gameObject.SetActive(false);
+            gameManager.GameOver();
+
+        }
 
         if (btnDown)
         {

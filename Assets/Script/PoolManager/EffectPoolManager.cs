@@ -24,12 +24,13 @@ public class EffectPoolManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
-        InitializePool();
+        //InitializePool();
     }
 
     // 풀 초기화
-    private void InitializePool()
+    public void InitializePool()
     {
+        effectPool = new Queue<Effect>();
         for (int i = 0; i < initialPoolSize; i++)
         {
             CreateNewEffect();
