@@ -207,7 +207,6 @@ public class Player : Character
     {
         if (!isInvincible)
         {
-            
             base.TakeDamage(atk);
             StartCoroutine(InvincibleCheck());
         }

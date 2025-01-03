@@ -75,7 +75,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 14
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,7 +97,7 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
@@ -140,10 +140,10 @@ TextureImporter:
       name: wakietokie_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 16
-        height: 36
+        x: 1
+        y: 1
+        width: 14
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,10 +162,10 @@ TextureImporter:
       name: wakietokie_1
       rect:
         serializedVersion: 2
-        x: 15
-        y: 0
-        width: 16
-        height: 36
+        x: 16
+        y: 1
+        width: 14
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +184,10 @@ TextureImporter:
       name: wakietokie_2
       rect:
         serializedVersion: 2
-        x: 30
-        y: 0
-        width: 16
-        height: 36
+        x: 31
+        y: 1
+        width: 14
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,10 +206,10 @@ TextureImporter:
       name: wakietokie_3
       rect:
         serializedVersion: 2
-        x: 45
-        y: 0
-        width: 16
-        height: 36
+        x: 46
+        y: 1
+        width: 14
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -228,10 +228,10 @@ TextureImporter:
       name: wakietokie_4
       rect:
         serializedVersion: 2
-        x: 60
-        y: 0
-        width: 16
-        height: 36
+        x: 61
+        y: 1
+        width: 14
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,10 +250,10 @@ TextureImporter:
       name: wakietokie_5
       rect:
         serializedVersion: 2
-        x: 75
-        y: 0
-        width: 16
-        height: 36
+        x: 76
+        y: 1
+        width: 14
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -272,10 +272,10 @@ TextureImporter:
       name: wakietokie_6
       rect:
         serializedVersion: 2
-        x: 90
-        y: 0
-        width: 16
-        height: 36
+        x: 91
+        y: 1
+        width: 14
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -294,10 +294,10 @@ TextureImporter:
       name: wakietokie_7
       rect:
         serializedVersion: 2
-        x: 105
-        y: 0
-        width: 16
-        height: 36
+        x: 106
+        y: 1
+        width: 14
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -316,10 +316,10 @@ TextureImporter:
       name: wakietokie_8
       rect:
         serializedVersion: 2
-        x: 120
-        y: 0
-        width: 16
-        height: 36
+        x: 121
+        y: 1
+        width: 14
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -338,7 +338,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 48fcaa43bb7a98c4485c43f7fe128509
     internalID: 0
     vertices: []
     indices: 

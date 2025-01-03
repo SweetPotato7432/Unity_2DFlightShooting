@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 22400000}
+  - component: {fileID: 2432176323938770008}
   m_Layer: 0
   m_Name: Circle open rotating 2
   m_TagString: Untagged
@@ -37,6 +38,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &2432176323938770008
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 82a77e2ab3f99a4448b3a5037983fcce, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 0
@@ -48,7 +71,6 @@ GameObject:
   - component: {fileID: 22400002}
   - component: {fileID: 22200000}
   - component: {fileID: 11400000}
-  - component: {fileID: 11100000}
   m_Layer: 0
   m_Name: circle_open_rotating_2_2
   m_TagString: Untagged
@@ -113,23 +135,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!111 &11100000
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: 0839d50a2e492c14c91ad2936242af37, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 0839d50a2e492c14c91ad2936242af37, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +146,6 @@ GameObject:
   - component: {fileID: 22400004}
   - component: {fileID: 22200002}
   - component: {fileID: 11400002}
-  - component: {fileID: 11100002}
   m_Layer: 0
   m_Name: circle_open_rotating_2_1
   m_TagString: Untagged
@@ -206,20 +210,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!111 &11100002
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: e8a72421393fcad4fbb5c7bca78d8ca8, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: e8a72421393fcad4fbb5c7bca78d8ca8, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0

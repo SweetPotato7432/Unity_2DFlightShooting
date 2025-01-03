@@ -26,13 +26,15 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject resultMenu;
 
+    bool isTutorial = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        BulletPoolManager.Instance.InitializePool();
         EnemyPoolManager.Instance.InitializePool();
-        EffectPoolManager.Instance.InitializePool();
 
+        BulletPoolManager.Instance.InitializePool();
+        EffectPoolManager.Instance.InitializePool();
 
         player = FindFirstObjectByType<Player>();
 
@@ -53,29 +55,37 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
-        if (time >= spawnCooltime)
+        if (!isTutorial)
         {
-            player = FindFirstObjectByType<Player>();
-            if (player != null)
+            // 본게임 코드
+            time += Time.deltaTime;
+            if (time >= spawnCooltime)
             {
-                SpawnEnemy();
-                time -= spawnCooltime;
+                player = FindFirstObjectByType<Player>();
+                if (player != null)
+                {
+                    SpawnEnemy();
+                    time -= spawnCooltime;
+                }
             }
+
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    SpawnEnemy();
+            //}
+        }
+        else
+        {
+            // 튜토리얼 코드
+
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SpawnEnemy();
-        }
 
         scoreText.text = score.ToString();
 
-
-        
     }
 
-    private void SpawnEnemy()
+    public void SpawnEnemy()
     {
         //int spawnIndex = Random.Range(0, spawnPoints.Count);
         int Index = Random.Range(0,randomIndex.Count);
@@ -91,6 +101,7 @@ public class GameManager : MonoBehaviour
 
         Enemy enemy = EnemyPoolManager.Instance.GetEnemy(spawnPosition);
         //Debug.Log($"Spawned Enemy at {spawnPosition}");
+
     }
 
     public void AddScore(int score)
@@ -107,5 +118,10 @@ public class GameManager : MonoBehaviour
     {
         GameSettingData.Instance.SaveScore(score);
         resultMenu.gameObject.SetActive(true);
+    }
+
+    public void TutorialStart()
+    {
+        isTutorial = true;
     }
 }

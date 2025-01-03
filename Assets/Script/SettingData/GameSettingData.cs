@@ -61,6 +61,16 @@ public class GameSettingData : MonoBehaviour
         }
     }
 
+    public void ResetRanking()
+    {
+        PlayerPrefs.SetInt("CurrentPlayerRank", -1);
+        for(int i = 0;i < 10; i++)
+        {
+            PlayerPrefs.DeleteKey(i + "BestScore");
+        }
+        
+    }
+
     public void InitializeCurrentPlayer()
     {
         PlayerPrefs.SetInt("CurrentPlayerRank", -1);
