@@ -44,9 +44,13 @@ public class Player : Character
 
     bool isInvincible;
 
+    AudioSource shootSound;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        shootSound = GetComponent<AudioSource>();
+
         gameManager = FindFirstObjectByType<GameManager>();
 
         isInvincible = false;
@@ -133,6 +137,7 @@ public class Player : Character
     {
         if(canAttack)
         {
+            shootSound.Play();
             Bullet bullet = BulletPoolManager.Instance.GetBullet(this.tag, shootPosition.position, atk);
             StartCoroutine(AttackCoolTime());
         }

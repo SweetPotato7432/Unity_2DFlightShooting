@@ -13,10 +13,14 @@ public class Bullet : MonoBehaviour
     bool isFirstDeactive = true;
 
     private SpriteRenderer spriteRenderer;
+
+    bool isTimeEnd = false;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
+
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -33,7 +37,8 @@ public class Bullet : MonoBehaviour
 
     public void Initalize(string tag, Vector3 position, int atk)
     {
-        if(tag == "Player")
+        isTimeEnd = false;
+        if (tag == "Player")
         {
             //spriteRenderer.flipY = false;
             bulletVelocity = 10f;
@@ -50,6 +55,7 @@ public class Bullet : MonoBehaviour
             targetTag = "Player";
         }
         gameObject.SetActive(true);
+
         transform.position = position;
         StartCoroutine(ActiveTimeLimit());
     }
@@ -60,7 +66,7 @@ public class Bullet : MonoBehaviour
         {
             isFirstDeactive = false;
         }
-        else
+        else if(!isTimeEnd)
         {
             EffectPoolManager.Instance.GetEffect(transform.position, Effect.AnimType.BulletHit);
         }
@@ -72,7 +78,9 @@ public class Bullet : MonoBehaviour
 
     IEnumerator ActiveTimeLimit()
     {
+        isTimeEnd = false;
         yield return new WaitForSeconds(3.0f);
+        isTimeEnd = true;
         Deactive();
     }
 
