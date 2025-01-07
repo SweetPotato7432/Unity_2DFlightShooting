@@ -6,6 +6,7 @@ public class SceneChange : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         MySceneManger.Instance.ChangeScene(sceneName);
+        //AudioManager.Instance.ChangeMusic(sceneName);
     }
 
     public void ExitGame()

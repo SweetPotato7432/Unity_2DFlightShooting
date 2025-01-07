@@ -38,6 +38,7 @@ public class MySceneManger : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
+        AudioManager.Instance.ChangeMusic(sceneName);
         fade_IMG.DOFade(1, fadeDuration)
         .SetUpdate(true)
         .OnStart(() => { 
