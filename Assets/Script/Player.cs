@@ -128,10 +128,29 @@ public class Player : Character
 
     public void LateUpdate()
     {
-        // 플레이어의 월드 좌표를 2D 좌표로 전송
+        //플레이어의 월드 좌표를 2D 좌표로 전송
         Vector3 screenPos = mainCamera.WorldToScreenPoint(transform.position);
-        screenPos.y = screenPos.y - 70f;
+
+        // 화면 해상도에 맞춰 오프셋을 조정
+        float screenHeight = Screen.height; // 화면 높이
+        float screenWidth = Screen.width;   // 화면 너비
+
+        // 오프셋을 고정 비율로 계산: 화면의 높이와 너비에 비례하여 오프셋을 수정
+        float offsetY = -75f;  // Y축 오프셋 (플레이어 위에 HP바를 위치시키기 위해)
+        float offsetX = 0f;   // X축 오프셋 (이건 필요에 따라 설정)
+
+        // 해상도에 맞춰 오프셋을 비례적으로 조정
+        float ratioY = screenHeight / 1080f; // 기준 해상도 (1080p) 기준으로 비율을 계산
+        float ratioX = screenWidth / 1920f;  // 기준 해상도 (1920p) 기준으로 비율을 계산
+
+        // 비율에 맞춰 오프셋을 조정
+        screenPos.y += offsetY * ratioY;  // 높이에 비례하여 Y 오프셋 조정
+        screenPos.x += offsetX * ratioX;  // 너비에 비례하여 X 오프셋 조정 (필요에 따라)
+
+
+        //screenPos.y = screenPos.y - 80f;
         ui_hp_bar.position = screenPos;
+
     }
     public override void Attack()
     {
