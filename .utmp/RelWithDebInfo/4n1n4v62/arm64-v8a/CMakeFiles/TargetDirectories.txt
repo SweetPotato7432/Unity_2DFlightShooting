@@ -1,0 +1,8 @@
+C:/Users/game/Desktop/GJY/Unity_2DFlightShooting/.utmp/RelWithDebInfo/4n1n4v62/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/game/Desktop/GJY/Unity_2DFlightShooting/.utmp/RelWithDebInfo/4n1n4v62/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/game/Desktop/GJY/Unity_2DFlightShooting/.utmp/RelWithDebInfo/4n1n4v62/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Users/game/Desktop/GJY/Unity_2DFlightShooting/.utmp/RelWithDebInfo/4n1n4v62/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Users/game/Desktop/GJY/Unity_2DFlightShooting/.utmp/RelWithDebInfo/4n1n4v62/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
+C:/Users/game/Desktop/GJY/Unity_2DFlightShooting/.utmp/RelWithDebInfo/4n1n4v62/arm64-v8a/FramePacing/CMakeFiles/swappywrapper.dir
+C:/Users/game/Desktop/GJY/Unity_2DFlightShooting/.utmp/RelWithDebInfo/4n1n4v62/arm64-v8a/FramePacing/CMakeFiles/edit_cache.dir
+C:/Users/game/Desktop/GJY/Unity_2DFlightShooting/.utmp/RelWithDebInfo/4n1n4v62/arm64-v8a/FramePacing/CMakeFiles/rebuild_cache.dir
